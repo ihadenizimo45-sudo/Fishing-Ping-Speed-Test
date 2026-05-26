@@ -1,0 +1,462 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Home | Fishing Ping & Speed Test</title>
+  <meta name="description" content="Home for Fishing Ping & Speed Test by TWMISCO.">
+  <meta name="theme-color" content="#071a25">
+  <style>
+:root {
+  --bg: #071a25;
+  --panel: rgba(255, 255, 255, 0.08);
+  --panel-strong: rgba(255, 255, 255, 0.13);
+  --text: #eef9ff;
+  --muted: #a8c6d6;
+  --accent: #20d6b3;
+  --accent-2: #59a6ff;
+  --sun: #ffd166;
+  --danger: #ff7b7b;
+  --shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+  --radius: 28px;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at 12% 12%, rgba(32, 214, 179, 0.24), transparent 32%),
+    radial-gradient(circle at 88% 8%, rgba(89, 166, 255, 0.22), transparent 30%),
+    radial-gradient(circle at 50% 95%, rgba(255, 209, 102, 0.12), transparent 36%),
+    linear-gradient(145deg, #05131d 0%, #092033 48%, #06131c 100%);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: .18;
+  background-image:
+    linear-gradient(rgba(255,255,255,.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.08) 1px, transparent 1px);
+  background-size: 42px 42px;
+  mask-image: linear-gradient(to bottom, black, transparent 75%);
+}
+a { color: inherit; text-decoration: none; }
+.shell {
+  width: min(1120px, calc(100% - 32px));
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 18px;
+  padding: 22px 0;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 850;
+  letter-spacing: -0.04em;
+}
+.logo {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border-radius: 17px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: #062033;
+  box-shadow: 0 14px 40px rgba(32, 214, 179, .26);
+}
+.links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 999px;
+  background: rgba(255,255,255,.06);
+  backdrop-filter: blur(18px);
+}
+.links a {
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 700;
+  padding: 10px 14px;
+  border-radius: 999px;
+  transition: .25s ease;
+}
+.links a:hover, .links a.active {
+  color: #06131c;
+  background: linear-gradient(135deg, var(--accent), var(--sun));
+}
+.hero {
+  display: grid;
+  grid-template-columns: 1.1fr .9fr;
+  gap: 34px;
+  align-items: center;
+  padding: 58px 0 38px;
+}
+.kicker {
+  display: inline-flex;
+  gap: 9px;
+  align-items: center;
+  color: #052035;
+  background: linear-gradient(135deg, var(--accent), var(--sun));
+  border-radius: 999px;
+  padding: 10px 14px;
+  font-size: 13px;
+  font-weight: 850;
+  box-shadow: 0 14px 38px rgba(32, 214, 179, .20);
+}
+h1 {
+  font-size: clamp(42px, 7vw, 86px);
+  line-height: .92;
+  margin: 22px 0 20px;
+  letter-spacing: -0.08em;
+}
+h2 {
+  font-size: clamp(28px, 4vw, 48px);
+  line-height: 1;
+  margin: 0 0 16px;
+  letter-spacing: -0.055em;
+}
+h3 {
+  font-size: 20px;
+  margin: 0 0 9px;
+}
+p {
+  color: var(--muted);
+  line-height: 1.75;
+  font-size: 16px;
+}
+.lead {
+  font-size: clamp(17px, 2vw, 21px);
+  max-width: 700px;
+}
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 13px;
+  margin-top: 28px;
+}
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 18px;
+  padding: 14px 18px;
+  font-weight: 850;
+  transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
+}
+.button.primary {
+  color: #06131c;
+  background: linear-gradient(135deg, var(--accent), var(--sun));
+}
+.button.secondary { background: rgba(255,255,255,.07); color: var(--text); }
+.button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 44px rgba(0,0,0,.22);
+}
+.phone {
+  min-height: 520px;
+  border-radius: 42px;
+  padding: 18px;
+  background: linear-gradient(145deg, rgba(255,255,255,.20), rgba(255,255,255,.05));
+  border: 1px solid rgba(255,255,255,.18);
+  box-shadow: var(--shadow);
+  transform: rotate(2deg);
+}
+.screen {
+  height: 100%;
+  border-radius: 32px;
+  padding: 24px;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(32,214,179,.28), transparent 38%),
+    linear-gradient(180deg, rgba(6,30,46,.95), rgba(2,13,20,.98));
+  overflow: hidden;
+  position: relative;
+}
+.radar {
+  width: 230px;
+  height: 230px;
+  margin: 26px auto 18px;
+  border: 1px solid rgba(32,214,179,.38);
+  border-radius: 50%;
+  position: relative;
+  background:
+    radial-gradient(circle, transparent 0 23%, rgba(32,214,179,.08) 24% 25%, transparent 26% 48%, rgba(32,214,179,.08) 49% 50%, transparent 51%),
+    conic-gradient(from 20deg, rgba(32,214,179,.55), rgba(32,214,179,.05), transparent 34%);
+  animation: pulse 3s ease-in-out infinite;
+}
+.radar::before, .radar::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  background: var(--sun);
+  box-shadow: 0 0 24px rgba(255,209,102,.65);
+}
+.radar::before { width: 12px; height: 12px; left: 64%; top: 26%; }
+.radar::after { width: 9px; height: 9px; left: 28%; top: 66%; }
+.metric-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+.metric, .card {
+  border: 1px solid rgba(255,255,255,.12);
+  background: var(--panel);
+  border-radius: var(--radius);
+  padding: 20px;
+  backdrop-filter: blur(18px);
+  box-shadow: 0 18px 50px rgba(0,0,0,.18);
+}
+.metric b {
+  display: block;
+  font-size: 29px;
+  letter-spacing: -0.06em;
+}
+.metric span, .small {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin: 30px 0;
+}
+.grid.two { grid-template-columns: repeat(2, 1fr); }
+.card {
+  transition: transform .25s ease, border-color .25s ease, background .25s ease;
+}
+.card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(32,214,179,.55);
+  background: var(--panel-strong);
+}
+.icon {
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  border-radius: 16px;
+  background: rgba(32,214,179,.14);
+  margin-bottom: 14px;
+  font-size: 23px;
+}
+.section { padding: 44px 0; }
+.notice {
+  border: 1px solid rgba(32,214,179,.35);
+  background: linear-gradient(135deg, rgba(32,214,179,.14), rgba(89,166,255,.10));
+  border-radius: var(--radius);
+  padding: 24px;
+  margin: 24px 0;
+}
+.timeline {
+  position: relative;
+  display: grid;
+  gap: 14px;
+  margin-top: 22px;
+}
+.step {
+  display: grid;
+  grid-template-columns: 42px 1fr;
+  gap: 14px;
+  align-items: start;
+}
+.step .dot {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  color: #06131c;
+  font-weight: 900;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--accent), var(--sun));
+}
+.footer {
+  padding: 34px 0 46px;
+  color: var(--muted);
+  border-top: 1px solid rgba(255,255,255,.10);
+  margin-top: 38px;
+}
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+.badge-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 20px 0;
+}
+.badge {
+  border: 1px solid rgba(255,255,255,.14);
+  background: rgba(255,255,255,.07);
+  color: var(--muted);
+  border-radius: 999px;
+  padding: 9px 12px;
+  font-size: 13px;
+  font-weight: 800;
+}
+.accordion {
+  margin-top: 18px;
+  display: grid;
+  gap: 12px;
+}
+details {
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.07);
+  border-radius: 20px;
+  padding: 16px 18px;
+}
+summary {
+  cursor: pointer;
+  font-weight: 850;
+}
+details p { margin-bottom: 0; }
+@keyframes pulse {
+  0%, 100% { transform: scale(1); filter: hue-rotate(0deg); }
+  50% { transform: scale(1.04); filter: hue-rotate(18deg); }
+}
+@media (max-width: 860px) {
+  .nav {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .links {
+    width: 100%;
+    overflow-x: auto;
+    justify-content: flex-start;
+  }
+  .hero, .grid.two {
+    grid-template-columns: 1fr;
+  }
+  .phone {
+    min-height: 440px;
+    transform: none;
+  }
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 520px) {
+  .shell { width: min(100% - 20px, 1120px); }
+  .links a { padding: 9px 11px; font-size: 13px; }
+  .hero { padding-top: 26px; }
+  .metric-grid { grid-template-columns: 1fr; }
+  .card, .notice { padding: 18px; border-radius: 22px; }
+  .phone { padding: 12px; border-radius: 30px; }
+  .screen { border-radius: 23px; padding: 18px; }
+  .radar { width: 190px; height: 190px; }
+}
+</style>
+</head>
+<body>
+  
+<header class="shell nav">
+  <a class="brand" href="index.html" aria-label="Fishing Ping & Speed Test home">
+    <span class="logo" aria-hidden="true"></span>
+    <span>Fishing Ping & Speed Test</span>
+  </a>
+  <nav class="links" aria-label="Main navigation">
+    <a href="index.html" class="active">Home</a>
+<a href="privacy-policy.html" class="">Privacy Policy</a>
+<a href="support.html" class="">Support</a>
+<a href="marketing.html" class="">Marketing</a>
+  </nav>
+</header>
+
+  
+<main class="shell">
+  <section class="hero">
+    <div>
+      <span class="kicker">Transparent developer profile · Google Play ready</span>
+      <h1>Fishing Ping & Speed Test</h1>
+      <p class="lead">
+        A simple, focused utility app created by TWMISCO to help users check network ping and speed in a clear and accessible way.
+        This page exists to give users and reviewers a transparent overview of the app, developer identity, support options, and privacy approach.
+      </p>
+      <div class="badge-row">
+        <span class="badge">No data collection declared</span>
+        <span class="badge">No paid features currently</span>
+        <span class="badge">Mobile-first design</span>
+        <span class="badge">Built by an independent developer</span>
+      </div>
+      <div class="actions">
+        <a class="button primary" href="privacy-policy.html">Read Privacy Policy</a>
+        <a class="button secondary" href="support.html">Contact Support</a>
+      </div>
+    </div>
+    <aside class="phone" aria-label="Decorative app preview">
+      <div class="screen">
+        <span class="small">Live style preview</span>
+        <div class="radar"></div>
+        <div class="metric-grid">
+          <div class="metric"><b>24 ms</b><span>Sample ping</span></div>
+          <div class="metric"><b>Fast</b><span>Connection state</span></div>
+          <div class="metric"><b>0 KB</b><span>Personal data stored</span></div>
+          <div class="metric"><b>Open</b><span>Developer info</span></div>
+        </div>
+      </div>
+    </aside>
+  </section>
+
+  <section class="section">
+    <h2>Developer and app information</h2>
+    <div class="grid">
+      <article class="card">
+        <h3>Developer</h3>
+        <p>TWMISCO is the developer account responsible for this application.</p>
+      </article>
+      <article class="card">
+        <h3>Account contact</h3>
+        <p>Users, reviewers, and partners can contact the developer at <a href="mailto:ihadenizimo45@gmail.com">ihadenizimo45@gmail.com</a>.</p>
+      </article>
+      <article class="card">
+        <h3>Application</h3>
+        <p>Fishing Ping & Speed Test focuses on network ping and speed testing with a simple user experience.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="section notice">
+    <h2>Clear commitments</h2>
+    <p>
+      The app is presented with transparency: no personal data collection, no storage of user data, no sharing of user data with third parties,
+      and no current paid features or subscriptions. Future monetization may be introduced only with clearer user-facing information.
+    </p>
+  </section>
+</main>
+
+  
+<footer class="shell footer">
+  <div class="footer-inner">
+    <div>
+      <strong>Fishing Ping & Speed Test</strong><br>
+      Developer: TWMISCO
+    </div>
+    <div>
+      Contact: <a href="mailto:ihadenizimo45@gmail.com">ihadenizimo45@gmail.com</a><br>
+      © 2026 TWMISCO. All rights reserved.
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
