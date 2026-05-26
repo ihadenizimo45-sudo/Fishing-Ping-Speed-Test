@@ -54,11 +54,21 @@ a { color: inherit; text-decoration: none; }
   z-index: 1;
 }
 .nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 18px;
-  padding: 22px 0;
+  padding: 14px 18px;
+  margin-top: 10px;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 26px;
+  background: rgba(7, 26, 37, .82);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+  box-shadow: 0 18px 50px rgba(0,0,0,.22);
 }
 .brand {
   display: flex;
@@ -336,8 +346,10 @@ details p { margin-bottom: 0; }
 }
 @media (max-width: 860px) {
   .nav {
+    top: 8px;
     align-items: flex-start;
     flex-direction: column;
+    border-radius: 22px;
   }
   .links {
     width: 100%;
@@ -393,7 +405,7 @@ details p { margin-bottom: 0; }
         The current policy is simple: we do not collect, store, sell, share, or transfer user data.
       </p>
       <div class="actions">
-        <a class="button primary" href="mailto:ihadenizimo45@gmail.com">Contact Developer</a>
+        <a class="button primary" href="#developer-contact">Contact Developer</a>
         <a class="button secondary" href="index.html">Back to Home</a>
       </div>
     </div>
@@ -401,7 +413,7 @@ details p { margin-bottom: 0; }
       <h3>Effective date</h3>
       <p>May 26, 2026</p>
       <h3>Developer</h3>
-      <p>TWMISCO<br><a href="mailto:ihadenizimo45@gmail.com">ihadenizimo45@gmail.com</a></p>
+      <p>TWMISCO<br><span class="email-text">ihadenizimo45@gmail.com</span></p>
     </aside>
   </section>
 
@@ -445,6 +457,18 @@ details p { margin-bottom: 0; }
       Any important privacy-related update will be presented clearly to users.
     </p>
   </section>
+
+  <section class="section notice" id="developer-contact">
+    <h2>Developer contact</h2>
+    <p>
+      For support, privacy questions, Google Play review, or developer account verification, please use this email address:
+    </p>
+    <div class="badge-row">
+      <span class="badge">ihadenizimo45@gmail.com</span>
+      <button class="button secondary" type="button" onclick="copyDeveloperEmail(this)">Copy email</button>
+    </div>
+  </section>
+
 </main>
 
   
@@ -455,7 +479,7 @@ details p { margin-bottom: 0; }
       Developer: TWMISCO
     </div>
     <div>
-      Contact: <a href="mailto:ihadenizimo45@gmail.com">ihadenizimo45@gmail.com</a><br>
+      Contact: <span class="email-text">ihadenizimo45@gmail.com</span><br>
       © 2026 TWMISCO. All rights reserved.
     </div>
   </div>
